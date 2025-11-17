@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.17)
+
+add_subdirectory(core)
+add_subdirectory(enhancedverif)
+add_subdirectory(primitives/km)
+add_subdirectory(object)
+add_subdirectory(support)
+add_subdirectory(targets)
+add_subdirectory(inc)
+add_subdirectory(irphandlers)

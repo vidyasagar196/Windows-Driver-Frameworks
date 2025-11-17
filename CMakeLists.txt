@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.17)
+project(KMDF)
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+
+set(GLOBAL_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(GLOBAL_BIN_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+set(PUBLIC_UM_HEADERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/publicinc/wdf/umdf/2.33)
+
+set(PUBLIC_KM_HEADERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/publicinc/wdf/kmdf/1.33)
+file(GLOB PUBLIC_KM_HEADERS "${PUBLIC_KM_HEADERS_DIR}/*.h")
+
+set(PRIVATE_KM_HEADERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/kmdf/inc/private)
+file(GLOB PRIVATE_KM_HEADERS "${PRIVATE_KM_HEADERS_DIR}/*.h")
+
+add_subdirectory(src/framework)
+
+add_library(KMDF  ${SRC_FILES} ${PUBLIC_KM_HEADERS} ${PRIVATE_KM_HEADERS})
+
+target_include_directories(KMDF PUBLIC ${PUBLIC_KM_HEADERS})
+
+target_compile_features(KMDF PRIVATE cxx_std_17)
